@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import classes from "./Checkout.module.css";
 
 const isEmpty = (value) => value.trim() === "";
-const isFiveChars = (value) => value.trim() === 5;
+const isFiveChars = (value) => value.trim().length === 5;
 
 const Checkout = (props) => {
   const [formInputValidity, setFormInputValidity] = useState({
@@ -44,8 +44,16 @@ const Checkout = (props) => {
       enteredPostalCodeIsValid;
 
     if (!formIsValid) {
+      console.log("hata");
       return;
     }
+
+    props.onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postalCode: enteredPostalCode,
+    });
   };
 
   //Conditional Error classes
